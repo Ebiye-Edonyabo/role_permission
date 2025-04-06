@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Enums\UserRoles;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -21,11 +22,16 @@ class AuthController extends Controller
         $validated = $request->validated();
         $validated['password'] = Hash::make($validated['password']);
         
+        // Generate slug from username
+        $validated['slug'] = Str::slug($validated['name']);
+
         $user = User::create($validated);
 
         $user->assignRole(UserRoles::CUSTOMER->value);
 
-        return redirect('/admin')->with('message', 'Account created successfully!');
+        return back();
+
+        // return redirect('/admin')->with('message', 'Account created successfully!');
     }
 
     public function login()
@@ -45,6 +51,6 @@ class AuthController extends Controller
             return back()->withErrors(['password' => 'Your credentials do match']);
         }
 
-        return redirect('/admin');
+        return redirect()->route('admin.dashboard');
     }
 }

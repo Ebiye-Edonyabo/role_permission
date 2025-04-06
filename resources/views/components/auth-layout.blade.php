@@ -11,15 +11,11 @@
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
         <!-- Styles / Scripts -->
-         
-        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
    
     </head>
-    <body class="bg-[#FDFDFC]">
+    <body class="bg-[#FDFDFC] flex flex-col justify-center items-center h-screen">
 
-        {{-- side bar --}}
-        <x-side-bar />
 
         {{ $slot }}
 

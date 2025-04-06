@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Enums\UserPermissions;
-use App\Enums\UserRoles;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Enums\UserRoles;
+use Illuminate\Support\Str;
+use App\Enums\UserPermissions;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class AdminSeeder extends Seeder
 {
@@ -18,6 +19,7 @@ class AdminSeeder extends Seeder
     {
         User::create([
             'name' => 'admin',
+            'slug' => Str::slug('admin'),
             'email' => 'adminebiye@mail.com',
             'password' => Hash::make('test1234'),
         ])->assignRole(UserRoles::ADMIN->value)->givePermissionTo(UserPermissions::cases());

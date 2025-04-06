@@ -29,7 +29,7 @@ class AuthController extends Controller
 
         $user->assignRole(UserRoles::CUSTOMER->value);
 
-        return back();
+        return back()->with('message', 'Registration successful!');
 
         // return redirect('/admin')->with('message', 'Account created successfully!');
     }

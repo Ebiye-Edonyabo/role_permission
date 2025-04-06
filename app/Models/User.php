@@ -48,4 +48,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the route key for the model. This is to always override the defualt key "ID" with "slug" for route wild cards on this model.
+     */
+ 
 }

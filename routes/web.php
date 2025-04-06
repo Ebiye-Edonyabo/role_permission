@@ -21,6 +21,16 @@ Route::middleware('guest')->prefix('auth')->group(function () {
 // admin route
 Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('admin.')->group( function () {
 
-    Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::resource('agents', AgentController::class);
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+    Route::get('/agents', [AgentController::class, 'index'])->name('agents.index');
+    Route::post('/agents', [AgentController::class, 'store'])->name('agents.store');
+    Route::get('/agents/{agent:slug}', [AgentController::class, 'show'])->name('agents.show');
+
+     // Permission assignment
+     Route::post('/agents/{agent:slug}/create', [AgentController::class, 'givePermission'])->name('agents.permission.store');
+     Route::delete('/agents/{agent:slug}/destroy/{permission}', [AgentController::class, 'destroyPermission'])->name('agents.permission.destroy');
+
 });
+
+

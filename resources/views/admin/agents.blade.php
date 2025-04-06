@@ -27,7 +27,9 @@
                 <tbody>
                     @forelse ($agents as $agent)
                         <tr class="bg-white border-b border-gray-200">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{$agent->name}}</th>
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                <a href="{{ route('admin.agents.show', ['agent' => $agent->slug]) }}">{{$agent->name}}</a>
+                            </th>
                             <td class="px-6 py-4">{{$agent->email}}</td>
                             <td class="px-6 py-4">Laptop</td>
                             <td class="px-6 py-4">$2999</td>
@@ -45,6 +47,7 @@
 
     </div>
 
+    {{-- registration modal --}}
     <div class="container mx-auto p-2 text-center">
         <div class="mt-6" x-data="{ open: false }" x-show="open" @open-modal.window="open = true" >
       
@@ -53,7 +56,7 @@
                     <h2 class="text-lg text-center pb-4 font-medium">Register New Agent</h2>
                     <form 
                         method="POST" 
-                        action=" {{ url('/admin/agents') }}"
+                        action=" {{ route('admin.agents.store') }}"
                         class="max-w-xl w-full mx-auto space-y-4"
                         >
                         @csrf
@@ -92,7 +95,5 @@
             </div>
           
         </div>
-
-        
-      </div>
+    </div>
 </x-layout>
